@@ -659,7 +659,8 @@ InlineLexer.prototype.output = function(src) {
     // code
     if (cap = this.rules.code.exec(src)) {
       src = src.substring(cap[0].length);
-      out += this.renderer.codespan(escape(cap[2], true));
+      //out += this.renderer.codespan(escape(cap[2], true));
+      out += this.renderer.codespan(cap[2]);
       continue;
     }
 
@@ -756,7 +757,34 @@ function Renderer(options) {
   this.options = options || {};
 }
 
+var flowid = 0;
+
+var lang_render = {
+    "flow": function(code, escaped) {
+        ++flowid;
+
+        code = code.replace(/\n/g, "\\n");
+        code = code.replace(/\r/g, "\\n");
+        code = code.replace(/\r\n/g, "\\n");
+        code = code.replace(/\n\r/g, "\\n");
+       var s = '<div><id="diagram'
+            + flowid
+            + '"/></div><script>var d=flowchart.parse(\''
+            + (escaped ? unescape(code) : code)
+            + '\');d.drawSVG(\'diagram'
+            + flowid
+            + '\');</script>';
+       return s;
+    }
+}
+
 Renderer.prototype.code = function(code, lang, escaped) {
+
+     f=    lang_render[lang];
+        if (f != null) {
+            return f(code, escaped);
+        }
+
   if (this.options.highlight) {
     var out = this.options.highlight(code, lang);
     if (out != null && out !== code) {
@@ -770,6 +798,7 @@ Renderer.prototype.code = function(code, lang, escaped) {
       + (escaped ? code : escape(code, true))
       + '\n</code></pre>';
   }
+
 
   return '<pre><code class="'
     + this.options.langPrefix

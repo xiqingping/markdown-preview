@@ -67,6 +67,14 @@
                     .attr('src', chrome.extension.getURL('js/runMathJax.js'));
                 $(document.head).append(js);
             }
+
+            js = $('<script/>').attr('type', 'text/javascript')
+                .attr('src', chrome.extension.getURL('js/raphael-min.js'));
+            $(document.head).append(js);
+
+            js = $('<script/>').attr('type', 'text/javascript')
+                .attr('src', chrome.extension.getURL('js/flowchart-latest.js'));
+            $(document.head).append(js);
         });
     }
 

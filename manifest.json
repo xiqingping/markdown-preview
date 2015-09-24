@@ -36,7 +36,9 @@
           "js/jquery.js",
           "js/marked.js",
           "js/highlight.js",
-          "js/markdownify.js"
+          "js/markdownify.js",
+          "js/flowchart-latest.js",
+          "js/raphael-min.js"
       ]
     }
   ],
@@ -58,6 +60,8 @@
       "theme/i/doc.png",
       "theme/i/email.png",
       "theme/i/folder.png",
+      "js/flowchart-latest.js",
+      "js/raphael-min.js",
       "js/popup.js", 
       "js/runMathJax.js", 
       "js/options.js"

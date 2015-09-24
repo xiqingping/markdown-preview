@@ -32,6 +32,23 @@ $('#mathjax').change(function() {
     }
 });
 
+// mermaid
+storage.get('mermaid', function(items) {
+    if(items.mermaid) {
+        $('#mermaid').attr('checked', 'checked');
+    } else {
+        $('#mermaid').removeAttr('checked');
+    }
+});
+
+$('#mermaid').change(function() {
+    if($(this).prop('checked')) {
+        storage.set({'mermaid' :1});
+    } else {
+        storage.remove('mermaid');
+    }
+});
+
 // auto-reload
 storage.get('auto_reload', function(items) {
     if(items.auto_reload) {
