@@ -60,6 +60,7 @@
             });
             var html = marked(data);
             $(document.body).html(html);
+            mermaid.init();
 
             if (items.mathjax) {
                 // Inject js to reload MathJax
@@ -67,14 +68,6 @@
                     .attr('src', chrome.extension.getURL('js/runMathJax.js'));
                 $(document.head).append(js);
             }
-
-            js = $('<script/>').attr('type', 'text/javascript')
-                .attr('src', chrome.extension.getURL('js/raphael-min.js'));
-            $(document.head).append(js);
-
-            js = $('<script/>').attr('type', 'text/javascript')
-                .attr('src', chrome.extension.getURL('js/flowchart-latest.js'));
-            $(document.head).append(js);
         });
     }
 
@@ -115,6 +108,12 @@
                 }
             });
         }
+    }
+
+    function setMermaid() {
+        js = $('<script/>').attr('type', 'text/javascript')
+            .attr('src', chrome.extension.getURL('js/mermaid.min.js'));
+        $(document.head).append(js);
     }
 
     function setMathJax() {
@@ -193,6 +192,8 @@
         if(items.mathjax) {
             setMathJax();
         }
+
+        setMermaid();
 
         var exts = items.exclude_exts;
         if(!exts) {

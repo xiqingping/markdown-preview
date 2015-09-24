@@ -760,38 +760,24 @@ function Renderer(options) {
 var flowid = 0;
 
 var lang_render = {
-    "flow": function(code, escaped) {
-        ++flowid;
-
-        code = code.replace(/\n/g, "\\n");
-        code = code.replace(/\r/g, "\\n");
-        code = code.replace(/\r\n/g, "\\n");
-        code = code.replace(/\n\r/g, "\\n");
-       var s = '<div><id="diagram'
-            + flowid
-            + '"/></div><script>var d=flowchart.parse(\''
-            + (escaped ? unescape(code) : code)
-            + '\');d.drawSVG(\'diagram'
-            + flowid
-            + '\');</script>';
-       return s;
-    }
+    "mermaid" : function(code, escaped) {
+        return '<div class="mermaid">\n'+code+'\n</div>';
+    },
 }
 
 Renderer.prototype.code = function(code, lang, escaped) {
-
-     f=    lang_render[lang];
-        if (f != null) {
-            return f(code, escaped);
-        }
-
-  if (this.options.highlight) {
-    var out = this.options.highlight(code, lang);
-    if (out != null && out !== code) {
-      escaped = true;
-      code = out;
+    f = lang_render[lang];
+    if (f != null) {
+        return f(code, escaped);
     }
-  }
+
+    if (this.options.highlight) {
+        var out = this.options.highlight(code, lang);
+        if (out != null && out !== code) {
+            escaped = true;
+            code = out;
+        }
+    }
 
   if (!lang) {
     return '<pre><code>'

@@ -37,8 +37,7 @@
           "js/marked.js",
           "js/highlight.js",
           "js/markdownify.js",
-          "js/flowchart-latest.js",
-          "js/raphael-min.js"
+          "js/mermaid.min.js"
       ]
     }
   ],
@@ -60,10 +59,9 @@
       "theme/i/doc.png",
       "theme/i/email.png",
       "theme/i/folder.png",
-      "js/flowchart-latest.js",
-      "js/raphael-min.js",
       "js/popup.js", 
-      "js/runMathJax.js", 
+      "js/runMathJax.js",
+      "js/mermaid.min.js",
       "js/options.js"
   ],
   "browser_action" : {
